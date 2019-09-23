@@ -1,0 +1,46 @@
+  <br>
+  <div *ngIf="!isFailed">
+    <br>
+    <!-- Form section -->
+    <form [formGroup]="form">
+      <label>Type in amount and select currency:</label>
+      <div class="row">
+        <div class="form-group col-sm-6" (input)="onModify()">
+          <input type="number" class="form-control" id="currency" formControlName="currency" >
+        </div>
+        <div class="form-group col-sm-6" >
+          <select class="form-control"  formControlName="curType" [(ngModel)]='selectedType1' (change)="onModify()">
+             <!-- <option value="" disabled>Choose your type</option> -->
+             <option *ngFor="let type of currencyType" [ngValue]="type">{{type}}</option>
+          </select>
+        </div>
+      </div>
+
+      <label>Converted Amount:</label>
+      <div class="row">
+        <div class="form-group col-sm-6" (input)="onModify()">
+          <input type="number" class="form-control" id="convertedCurrency" formControlName="convertedCurrency">
+        </div>
+        <div class="form-group col-sm-6">
+          <select class="form-control" formControlName="conCurType" [(ngModel)]='selectedType2' (change)="onModify()">
+             <option *ngFor="let type of currencyType" [ngValue]="type" >{{type}}</option>
+          </select>
+        </div>
+      </div>
+    </form>
+
+    <br>
+
+    <!-- Disclaimer Link -->
+    <div class="right">
+      <a  [routerLink]="['/disclaimer']">Disclaimer</a>
+    </div>
+
+    <br>
+  </div>
+
+  <!-- Error Notification in case of API Failure -->
+  <div *ngIf="isFailed">
+    <h6>{{errorMessage}}</h6>
+    <br>
+  </div>
